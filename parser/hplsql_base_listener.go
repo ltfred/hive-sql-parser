@@ -1,4 +1,4 @@
-// Code generated from Hplsql.g4 by ANTLR 4.13.1. DO NOT EDIT.
+// Code generated from Hplsql.g4 by ANTLR 4.13.2. DO NOT EDIT.
 
 package parser // Hplsql
 
@@ -254,6 +254,14 @@ func (s *BaseHplsqlListener) EnterCreate_table_definition(ctx *Create_table_defi
 
 // ExitCreate_table_definition is called when production create_table_definition is exited.
 func (s *BaseHplsqlListener) ExitCreate_table_definition(ctx *Create_table_definitionContext) {}
+
+// EnterCreate_table_column_comment is called when production create_table_column_comment is entered.
+func (s *BaseHplsqlListener) EnterCreate_table_column_comment(ctx *Create_table_column_commentContext) {
+}
+
+// ExitCreate_table_column_comment is called when production create_table_column_comment is exited.
+func (s *BaseHplsqlListener) ExitCreate_table_column_comment(ctx *Create_table_column_commentContext) {
+}
 
 // EnterCreate_table_columns is called when production create_table_columns is entered.
 func (s *BaseHplsqlListener) EnterCreate_table_columns(ctx *Create_table_columnsContext) {}

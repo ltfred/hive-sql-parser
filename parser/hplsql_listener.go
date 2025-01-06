@@ -1,4 +1,4 @@
-// Code generated from Hplsql.g4 by ANTLR 4.13.1. DO NOT EDIT.
+// Code generated from Hplsql.g4 by ANTLR 4.13.2. DO NOT EDIT.
 
 package parser // Hplsql
 
@@ -118,6 +118,9 @@ type HplsqlListener interface {
 
 	// EnterCreate_table_definition is called when entering the create_table_definition production.
 	EnterCreate_table_definition(c *Create_table_definitionContext)
+
+	// EnterCreate_table_column_comment is called when entering the create_table_column_comment production.
+	EnterCreate_table_column_comment(c *Create_table_column_commentContext)
 
 	// EnterCreate_table_columns is called when entering the create_table_columns production.
 	EnterCreate_table_columns(c *Create_table_columnsContext)
@@ -835,6 +838,9 @@ type HplsqlListener interface {
 
 	// ExitCreate_table_definition is called when exiting the create_table_definition production.
 	ExitCreate_table_definition(c *Create_table_definitionContext)
+
+	// ExitCreate_table_column_comment is called when exiting the create_table_column_comment production.
+	ExitCreate_table_column_comment(c *Create_table_column_commentContext)
 
 	// ExitCreate_table_columns is called when exiting the create_table_columns production.
 	ExitCreate_table_columns(c *Create_table_columnsContext)

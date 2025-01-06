@@ -18,24 +18,18 @@ func main() {
 	   c7 varchar(255)
 	) comment '3434'`)
 
-	//charStream := antlr.NewInputStream(`int COMMENT 'c1c1'`)
-
 	lexer := parser.NewHplsqlLexer(charStream)
 	stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
 
 	par := parser.NewHplsqlParser(stream)
 
 	ml := listener{}
-	//antlr.ParseTreeWalkerDefault.Walk(&ml, par.Create_table_stmt())
-
 	antlr.ParseTreeWalkerDefault.Walk(&ml, par.Create_table_stmt())
 }
 
 type listener struct{}
 
 func (l listener) EnterEveryRule(ctx antlr.ParserRuleContext) {
-	fmt.Printf("%T\n", ctx)
-	fmt.Println(ctx.GetText())
 
 	switch ctx.(type) {
 	case *parser.Table_nameContext:
@@ -44,6 +38,8 @@ func (l listener) EnterEveryRule(ctx antlr.ParserRuleContext) {
 		fmt.Println("table comment:", ctx.GetText())
 	case *parser.Column_nameContext:
 		fmt.Println("column:", ctx.GetText())
+	case *parser.Create_table_column_commentContext:
+		fmt.Println("comment:", ctx.GetText())
 	case *parser.DtypeContext:
 		fmt.Println("type:", ctx.GetText())
 	case *parser.Dtype_attrContext:
