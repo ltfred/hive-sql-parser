@@ -17,3 +17,10 @@ func TestParseCreateTableStmt(t *testing.T) {
 	tableStmt := stmt.(*CreateTableStmt)
 	t.Log(tableStmt)
 }
+
+func TestParseDropTableStmt(t *testing.T) {
+	parser := DropTableStmt{}
+	stmt := parser.Parse(`drop table test1`)
+	tableStmt := stmt.(*DropTableStmt)
+	t.Log(tableStmt)
+}

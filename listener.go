@@ -56,3 +56,12 @@ func (l *createTableStmtListener) EnterCreate_table_column_comment(ctx *antlr_ge
 func (l *createTableStmtListener) EnterCreate_table_options(ctx *antlr_gen.Create_table_optionsContext) {
 	l.tableComment = strings.TrimRight(ctx.GetText()[8:], "'")
 }
+
+type dropTableStmtListener struct {
+	antlr_gen.BaseHplsqlListener
+	tableName string
+}
+
+func (l *dropTableStmtListener) EnterTable_name(ctx *antlr_gen.Table_nameContext) {
+	l.tableName = ctx.GetText()
+}
