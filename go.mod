@@ -1,4 +1,4 @@
-module github.com/ltfred/hive-parse
+module github.com/ltfred/hive-sql-parser
 
 go 1.23.1
 

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/antlr4-go/antlr/v4"
-	"github.com/ltfred/hive-parse/antlr_gen"
+	"github.com/ltfred/hive-sql-parser/antlr_gen"
 )
 
 type CreateTableStmt struct {
