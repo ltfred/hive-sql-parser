@@ -1,6 +1,6 @@
 // Code generated from Hplsql.g4 by ANTLR 4.13.2. DO NOT EDIT.
 
-package parser // Hplsql
+package antlr_gen // Hplsql
 
 import (
 	"fmt"
