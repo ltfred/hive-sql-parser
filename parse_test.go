@@ -15,7 +15,7 @@ func TestParse(t *testing.T) {
 
 func (s *ParseTestSuit) TestParseCreateTableStmt() {
 	// no partition
-	parser := CreateTableStmt{}
+	parser := NewCreatTableStmtParser()
 	stmt := parser.Parse(`create table test1
 	(
 	   c1 int COMMENT 'c1c1',
@@ -53,4 +53,11 @@ func (s *ParseTestSuit) TestParseCreateTableStmt() {
 	s.Equal(1, len(tableStmt.PartitionColumns))
 	s.Equal("c8 partition", tableStmt.PartitionColumns[0].Comment)
 	s.Equal("string", tableStmt.PartitionColumns[0].Type)
+}
+
+func (s *ParseTestSuit) TestParseDropTableStmt() {
+	parser := NewDropTableStmtParser()
+	stmt := parser.Parse(`drop table test1`)
+	dropTableStmt := stmt.(*DropTableStmt)
+	s.Equal("test1", dropTableStmt.TableName)
 }

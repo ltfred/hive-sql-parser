@@ -29,7 +29,14 @@ type CreateTableStmt struct {
 	PartitionColumns []Column
 }
 
-func (parser *CreateTableStmt) Parse(sql string) Statement {
+type createTableStmtParser struct {
+}
+
+func NewCreatTableStmtParser() Parser {
+	return &createTableStmtParser{}
+}
+
+func (parser *createTableStmtParser) Parse(sql string) Statement {
 	listener := createTableStmtListener{}
 	antlr.ParseTreeWalkerDefault.Walk(&listener, newParser(sql).Create_table_stmt())
 
@@ -45,7 +52,14 @@ type DropTableStmt struct {
 	TableName string
 }
 
-func (parser *DropTableStmt) Parse(sql string) Statement {
+type dropTableStmtParser struct {
+}
+
+func NewDropTableStmtParser() Parser {
+	return &dropTableStmtParser{}
+}
+
+func (parser *dropTableStmtParser) Parse(sql string) Statement {
 	listener := dropTableStmtListener{}
 	antlr.ParseTreeWalkerDefault.Walk(&listener, newParser(sql).Drop_stmt())
 
