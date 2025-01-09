@@ -1,4 +1,4 @@
-package main
+package hive_sql_parser
 
 import (
 	"github.com/stretchr/testify/suite"
