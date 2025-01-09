@@ -173,6 +173,30 @@ type HplsqlListener interface {
 	// EnterCreate_table_options_td_item is called when entering the create_table_options_td_item production.
 	EnterCreate_table_options_td_item(c *Create_table_options_td_itemContext)
 
+	// EnterPartition_column_name is called when entering the partition_column_name production.
+	EnterPartition_column_name(c *Partition_column_nameContext)
+
+	// EnterPartition_dtype is called when entering the partition_dtype production.
+	EnterPartition_dtype(c *Partition_dtypeContext)
+
+	// EnterPartition_dtype_len is called when entering the partition_dtype_len production.
+	EnterPartition_dtype_len(c *Partition_dtype_lenContext)
+
+	// EnterCreate_table_hive_partition_columns_item is called when entering the create_table_hive_partition_columns_item production.
+	EnterCreate_table_hive_partition_columns_item(c *Create_table_hive_partition_columns_itemContext)
+
+	// EnterCreate_table_hive_partition_column_comment is called when entering the create_table_hive_partition_column_comment production.
+	EnterCreate_table_hive_partition_column_comment(c *Create_table_hive_partition_column_commentContext)
+
+	// EnterCreate_table_hive_partition_columns is called when entering the create_table_hive_partition_columns production.
+	EnterCreate_table_hive_partition_columns(c *Create_table_hive_partition_columnsContext)
+
+	// EnterCreate_table_hive_partitiion is called when entering the create_table_hive_partitiion production.
+	EnterCreate_table_hive_partitiion(c *Create_table_hive_partitiionContext)
+
+	// EnterCreate_table_options_hive_comment is called when entering the create_table_options_hive_comment production.
+	EnterCreate_table_options_hive_comment(c *Create_table_options_hive_commentContext)
+
 	// EnterCreate_table_options_hive_item is called when entering the create_table_options_hive_item production.
 	EnterCreate_table_options_hive_item(c *Create_table_options_hive_itemContext)
 
@@ -892,6 +916,30 @@ type HplsqlListener interface {
 
 	// ExitCreate_table_options_td_item is called when exiting the create_table_options_td_item production.
 	ExitCreate_table_options_td_item(c *Create_table_options_td_itemContext)
+
+	// ExitPartition_column_name is called when exiting the partition_column_name production.
+	ExitPartition_column_name(c *Partition_column_nameContext)
+
+	// ExitPartition_dtype is called when exiting the partition_dtype production.
+	ExitPartition_dtype(c *Partition_dtypeContext)
+
+	// ExitPartition_dtype_len is called when exiting the partition_dtype_len production.
+	ExitPartition_dtype_len(c *Partition_dtype_lenContext)
+
+	// ExitCreate_table_hive_partition_columns_item is called when exiting the create_table_hive_partition_columns_item production.
+	ExitCreate_table_hive_partition_columns_item(c *Create_table_hive_partition_columns_itemContext)
+
+	// ExitCreate_table_hive_partition_column_comment is called when exiting the create_table_hive_partition_column_comment production.
+	ExitCreate_table_hive_partition_column_comment(c *Create_table_hive_partition_column_commentContext)
+
+	// ExitCreate_table_hive_partition_columns is called when exiting the create_table_hive_partition_columns production.
+	ExitCreate_table_hive_partition_columns(c *Create_table_hive_partition_columnsContext)
+
+	// ExitCreate_table_hive_partitiion is called when exiting the create_table_hive_partitiion production.
+	ExitCreate_table_hive_partitiion(c *Create_table_hive_partitiionContext)
+
+	// ExitCreate_table_options_hive_comment is called when exiting the create_table_options_hive_comment production.
+	ExitCreate_table_options_hive_comment(c *Create_table_options_hive_commentContext)
 
 	// ExitCreate_table_options_hive_item is called when exiting the create_table_options_hive_item production.
 	ExitCreate_table_options_hive_item(c *Create_table_options_hive_itemContext)

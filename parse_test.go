@@ -1,8 +1,20 @@
 package main
 
-import "testing"
+import (
+	"github.com/stretchr/testify/suite"
+	"testing"
+)
 
-func TestParseCreateTableStmt(t *testing.T) {
+type ParseTestSuit struct {
+	suite.Suite
+}
+
+func TestParse(t *testing.T) {
+	suite.Run(t, new(ParseTestSuit))
+}
+
+func (s *ParseTestSuit) TestParseCreateTableStmt() {
+	// no partition
 	parser := CreateTableStmt{}
 	stmt := parser.Parse(`create table test1
 	(
@@ -15,12 +27,30 @@ func TestParseCreateTableStmt(t *testing.T) {
 	   c7 varchar(255)
 	) comment '3434'`)
 	tableStmt := stmt.(*CreateTableStmt)
-	t.Log(tableStmt)
-}
+	s.Equal("test1", tableStmt.TableName)
+	s.Equal("3434", tableStmt.TableComment)
+	s.Equal(7, len(tableStmt.TableColumns))
+	s.Equal(0, len(tableStmt.PartitionColumns))
+	s.Equal("c1c1", tableStmt.TableColumns[0].Comment)
+	s.Equal(true, tableStmt.TableColumns[1].NotNull)
+	s.Equal(255, tableStmt.TableColumns[6].Length)
 
-func TestParseDropTableStmt(t *testing.T) {
-	parser := DropTableStmt{}
-	stmt := parser.Parse(`drop table test1`)
-	tableStmt := stmt.(*DropTableStmt)
-	t.Log(tableStmt)
+	// with partition
+	stmt = parser.Parse(`create table test1
+	(
+	   c1 int COMMENT 'c1c1',
+	   c2 string not null,
+	   c3 boolean,
+	   c4 double,
+	   c5 date COMMENT 'date',
+	   c6 timestamp,
+	   c7 varchar(255)
+	) comment '3434' partitioned by (c8 string comment 'c8 partition')`)
+	tableStmt = stmt.(*CreateTableStmt)
+	s.Equal("test1", tableStmt.TableName)
+	s.Equal("3434", tableStmt.TableComment)
+	s.Equal(7, len(tableStmt.TableColumns))
+	s.Equal(1, len(tableStmt.PartitionColumns))
+	s.Equal("c8 partition", tableStmt.PartitionColumns[0].Comment)
+	s.Equal("string", tableStmt.PartitionColumns[0].Type)
 }

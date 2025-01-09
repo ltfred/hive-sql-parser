@@ -23,9 +23,10 @@ func newParser(sql string) *antlr_gen.HplsqlParser {
 }
 
 type CreateTableStmt struct {
-	TableName    string
-	TableComment string
-	TableColumns []Column
+	TableName        string
+	TableComment     string
+	TableColumns     []Column
+	PartitionColumns []Column
 }
 
 func (parser *CreateTableStmt) Parse(sql string) Statement {
@@ -33,9 +34,10 @@ func (parser *CreateTableStmt) Parse(sql string) Statement {
 	antlr.ParseTreeWalkerDefault.Walk(&listener, newParser(sql).Create_table_stmt())
 
 	return &CreateTableStmt{
-		TableName:    listener.tableName,
-		TableComment: listener.tableComment,
-		TableColumns: listener.tableColumns,
+		TableName:        listener.tableName,
+		TableComment:     listener.tableComment,
+		TableColumns:     listener.tableColumns,
+		PartitionColumns: listener.partitionColumns,
 	}
 }
 

@@ -33,7 +33,7 @@ single_block_stmt :                                      // Single BEGIN END blo
      ;
 
 block_end :
-       {!_input.LT(2).getText().equalsIgnoreCase("TRANSACTION")}? T_END 
+       {!strings.EqualFold(p.GetTokenStream().LT(2).GetText(),"TRANSACTION")}? T_END
      ;
 
 proc_block :
@@ -307,11 +307,11 @@ create_table_options :
 create_table_options_item :
        T_ON T_COMMIT (T_DELETE | T_PRESERVE) T_ROWS 
      | create_table_options_ora_item
-     | create_table_options_db2_item  
+     | create_table_options_db2_item
      | create_table_options_td_item
      | create_table_options_hive_item  
      | create_table_options_mssql_item
-     | create_table_options_mysql_item       
+     | create_table_options_mysql_item
      ;
 
 create_table_options_ora_item :
@@ -337,9 +337,80 @@ create_table_options_td_item :
        T_UNIQUE? T_PRIMARY T_INDEX T_OPEN_P qident (T_COMMA qident)* T_CLOSE_P
      | T_WITH T_DATA
      ;
-    
+
+partition_column_name :
+       qident
+     ;
+
+
+partition_dtype :                  // Data types
+       T_CHAR
+     | T_CHARACTER
+     | T_BIGINT
+     | T_BINARY_DOUBLE
+     | T_BINARY_FLOAT
+     | T_BINARY_INTEGER
+     | T_BIT
+     | T_DATE
+     | T_DATETIME
+     | T_DEC
+     | T_DECIMAL
+     | T_DOUBLE T_PRECISION?
+     | T_FLOAT
+     | T_INT
+     | T_INT2
+     | T_INT4
+     | T_INT8
+     | T_INTEGER
+     | T_NCHAR
+     | T_NVARCHAR
+     | T_NUMBER
+     | T_NUMERIC
+     | T_PLS_INTEGER
+     | T_REAL
+     | T_RESULT_SET_LOCATOR T_VARYING
+     | T_SIMPLE_FLOAT
+     | T_SIMPLE_DOUBLE
+     | T_SIMPLE_INTEGER
+     | T_SMALLINT
+     | T_SMALLDATETIME
+     | T_STRING
+     | T_SYS_REFCURSOR
+     | T_TIMESTAMP
+     | T_TINYINT
+     | T_VARCHAR
+     | T_VARCHAR2
+     | T_XML
+     | qident ('%' (T_TYPE | T_ROWTYPE))?             // User-defined or derived data type
+     ;
+
+partition_dtype_len :             // Data type length or size specification
+       T_OPEN_P (L_INT | T_MAX) (T_CHAR | T_BYTE)? (T_COMMA L_INT)? T_CLOSE_P
+     ;
+
+create_table_hive_partition_columns_item :
+       partition_column_name partition_dtype partition_dtype_len?
+     ;
+
+create_table_hive_partition_column_comment :
+       T_COMMENT expr;
+
+create_table_hive_partition_columns :
+       create_table_hive_partition_columns_item (create_table_hive_partition_column_comment)? (T_COMMA create_table_hive_partition_columns_item (create_table_hive_partition_column_comment)?)*
+     ;
+
+create_table_hive_partitiion :
+      T_PARTITIONED T_BY T_OPEN_P create_table_hive_partition_columns T_CLOSE_P
+     ;
+
+create_table_options_hive_comment :
+       T_COMMENT expr
+     ;
+
 create_table_options_hive_item :
-       create_table_hive_row_format
+       create_table_options_hive_comment
+     | create_table_hive_partitiion
+     | create_table_hive_row_format
      | T_STORED T_AS qident
      ;
      
@@ -1807,7 +1878,8 @@ T_OVERWRITE       : O V E R W R I T E ;
 T_OWNER           : O W N E R ; 
 T_PACKAGE         : P A C K A G E ; 
 T_PARTITION       : P A R T I T I O N ; 
-T_PCTFREE         : P C T F R E E ; 
+T_PARTITIONED     : P A R T I T I O N E D;
+T_PCTFREE         : P C T F R E E ;
 T_PCTUSED         : P C T U S E D ;
 T_PLS_INTEGER     : P L S '_' I N T E G E R ;
 T_PRECISION       : P R E C I S I O N ; 

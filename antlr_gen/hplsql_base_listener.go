@@ -377,6 +377,64 @@ func (s *BaseHplsqlListener) EnterCreate_table_options_td_item(ctx *Create_table
 func (s *BaseHplsqlListener) ExitCreate_table_options_td_item(ctx *Create_table_options_td_itemContext) {
 }
 
+// EnterPartition_column_name is called when production partition_column_name is entered.
+func (s *BaseHplsqlListener) EnterPartition_column_name(ctx *Partition_column_nameContext) {}
+
+// ExitPartition_column_name is called when production partition_column_name is exited.
+func (s *BaseHplsqlListener) ExitPartition_column_name(ctx *Partition_column_nameContext) {}
+
+// EnterPartition_dtype is called when production partition_dtype is entered.
+func (s *BaseHplsqlListener) EnterPartition_dtype(ctx *Partition_dtypeContext) {}
+
+// ExitPartition_dtype is called when production partition_dtype is exited.
+func (s *BaseHplsqlListener) ExitPartition_dtype(ctx *Partition_dtypeContext) {}
+
+// EnterPartition_dtype_len is called when production partition_dtype_len is entered.
+func (s *BaseHplsqlListener) EnterPartition_dtype_len(ctx *Partition_dtype_lenContext) {}
+
+// ExitPartition_dtype_len is called when production partition_dtype_len is exited.
+func (s *BaseHplsqlListener) ExitPartition_dtype_len(ctx *Partition_dtype_lenContext) {}
+
+// EnterCreate_table_hive_partition_columns_item is called when production create_table_hive_partition_columns_item is entered.
+func (s *BaseHplsqlListener) EnterCreate_table_hive_partition_columns_item(ctx *Create_table_hive_partition_columns_itemContext) {
+}
+
+// ExitCreate_table_hive_partition_columns_item is called when production create_table_hive_partition_columns_item is exited.
+func (s *BaseHplsqlListener) ExitCreate_table_hive_partition_columns_item(ctx *Create_table_hive_partition_columns_itemContext) {
+}
+
+// EnterCreate_table_hive_partition_column_comment is called when production create_table_hive_partition_column_comment is entered.
+func (s *BaseHplsqlListener) EnterCreate_table_hive_partition_column_comment(ctx *Create_table_hive_partition_column_commentContext) {
+}
+
+// ExitCreate_table_hive_partition_column_comment is called when production create_table_hive_partition_column_comment is exited.
+func (s *BaseHplsqlListener) ExitCreate_table_hive_partition_column_comment(ctx *Create_table_hive_partition_column_commentContext) {
+}
+
+// EnterCreate_table_hive_partition_columns is called when production create_table_hive_partition_columns is entered.
+func (s *BaseHplsqlListener) EnterCreate_table_hive_partition_columns(ctx *Create_table_hive_partition_columnsContext) {
+}
+
+// ExitCreate_table_hive_partition_columns is called when production create_table_hive_partition_columns is exited.
+func (s *BaseHplsqlListener) ExitCreate_table_hive_partition_columns(ctx *Create_table_hive_partition_columnsContext) {
+}
+
+// EnterCreate_table_hive_partitiion is called when production create_table_hive_partitiion is entered.
+func (s *BaseHplsqlListener) EnterCreate_table_hive_partitiion(ctx *Create_table_hive_partitiionContext) {
+}
+
+// ExitCreate_table_hive_partitiion is called when production create_table_hive_partitiion is exited.
+func (s *BaseHplsqlListener) ExitCreate_table_hive_partitiion(ctx *Create_table_hive_partitiionContext) {
+}
+
+// EnterCreate_table_options_hive_comment is called when production create_table_options_hive_comment is entered.
+func (s *BaseHplsqlListener) EnterCreate_table_options_hive_comment(ctx *Create_table_options_hive_commentContext) {
+}
+
+// ExitCreate_table_options_hive_comment is called when production create_table_options_hive_comment is exited.
+func (s *BaseHplsqlListener) ExitCreate_table_options_hive_comment(ctx *Create_table_options_hive_commentContext) {
+}
+
 // EnterCreate_table_options_hive_item is called when production create_table_options_hive_item is entered.
 func (s *BaseHplsqlListener) EnterCreate_table_options_hive_item(ctx *Create_table_options_hive_itemContext) {
 }

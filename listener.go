@@ -17,9 +17,10 @@ type Column struct {
 
 type createTableStmtListener struct {
 	antlr_gen.BaseHplsqlListener
-	tableName    string
-	tableComment string
-	tableColumns []Column
+	tableName        string
+	tableComment     string
+	tableColumns     []Column
+	partitionColumns []Column
 }
 
 func (l *createTableStmtListener) EnterTable_name(ctx *antlr_gen.Table_nameContext) {
@@ -40,7 +41,6 @@ func (l *createTableStmtListener) EnterDtype_len(ctx *antlr_gen.Dtype_lenContext
 		length, _ := strconv.ParseInt(node.String(), 10, 64)
 		l.tableColumns[len(l.tableColumns)-1].Length = int(length)
 	}
-
 }
 
 func (l *createTableStmtListener) EnterDtype_attr(ctx *antlr_gen.Dtype_attrContext) {
@@ -53,8 +53,28 @@ func (l *createTableStmtListener) EnterCreate_table_column_comment(ctx *antlr_ge
 	l.tableColumns[len(l.tableColumns)-1].Comment = strings.TrimRight(ctx.GetText()[8:], "'")
 }
 
-func (l *createTableStmtListener) EnterCreate_table_options(ctx *antlr_gen.Create_table_optionsContext) {
+func (l *createTableStmtListener) EnterCreate_table_options_hive_comment(ctx *antlr_gen.Create_table_options_hive_commentContext) {
 	l.tableComment = strings.TrimRight(ctx.GetText()[8:], "'")
+}
+
+func (l *createTableStmtListener) EnterPartition_column_name(ctx *antlr_gen.Partition_column_nameContext) {
+	l.partitionColumns = append(l.partitionColumns, Column{Name: ctx.GetText()})
+}
+
+func (l *createTableStmtListener) EnterPartition_dtype(ctx *antlr_gen.Partition_dtypeContext) {
+	l.partitionColumns[len(l.partitionColumns)-1].Type = ctx.GetText()
+}
+
+func (l *createTableStmtListener) EnterPartition_dtype_len(ctx *antlr_gen.Partition_dtype_lenContext) {
+	node, ok := ctx.GetChildren()[1].(*antlr.TerminalNodeImpl)
+	if ok {
+		length, _ := strconv.ParseInt(node.String(), 10, 64)
+		l.partitionColumns[len(l.partitionColumns)-1].Length = int(length)
+	}
+}
+
+func (l *createTableStmtListener) EnterCreate_table_hive_partition_column_comment(ctx *antlr_gen.Create_table_hive_partition_column_commentContext) {
+	l.partitionColumns[len(l.partitionColumns)-1].Comment = strings.TrimRight(ctx.GetText()[8:], "'")
 }
 
 type dropTableStmtListener struct {
