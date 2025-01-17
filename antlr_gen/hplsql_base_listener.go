@@ -275,24 +275,6 @@ func (s *BaseHplsqlListener) EnterCreate_table_columns_item(ctx *Create_table_co
 // ExitCreate_table_columns_item is called when production create_table_columns_item is exited.
 func (s *BaseHplsqlListener) ExitCreate_table_columns_item(ctx *Create_table_columns_itemContext) {}
 
-// EnterCreate_table_type_stmt is called when production create_table_type_stmt is entered.
-func (s *BaseHplsqlListener) EnterCreate_table_type_stmt(ctx *Create_table_type_stmtContext) {}
-
-// ExitCreate_table_type_stmt is called when production create_table_type_stmt is exited.
-func (s *BaseHplsqlListener) ExitCreate_table_type_stmt(ctx *Create_table_type_stmtContext) {}
-
-// EnterTbl_type is called when production tbl_type is entered.
-func (s *BaseHplsqlListener) EnterTbl_type(ctx *Tbl_typeContext) {}
-
-// ExitTbl_type is called when production tbl_type is exited.
-func (s *BaseHplsqlListener) ExitTbl_type(ctx *Tbl_typeContext) {}
-
-// EnterSql_type is called when production sql_type is entered.
-func (s *BaseHplsqlListener) EnterSql_type(ctx *Sql_typeContext) {}
-
-// ExitSql_type is called when production sql_type is exited.
-func (s *BaseHplsqlListener) ExitSql_type(ctx *Sql_typeContext) {}
-
 // EnterColumn_name is called when production column_name is entered.
 func (s *BaseHplsqlListener) EnterColumn_name(ctx *Column_nameContext) {}
 

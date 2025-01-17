@@ -128,15 +128,6 @@ type HplsqlListener interface {
 	// EnterCreate_table_columns_item is called when entering the create_table_columns_item production.
 	EnterCreate_table_columns_item(c *Create_table_columns_itemContext)
 
-	// EnterCreate_table_type_stmt is called when entering the create_table_type_stmt production.
-	EnterCreate_table_type_stmt(c *Create_table_type_stmtContext)
-
-	// EnterTbl_type is called when entering the tbl_type production.
-	EnterTbl_type(c *Tbl_typeContext)
-
-	// EnterSql_type is called when entering the sql_type production.
-	EnterSql_type(c *Sql_typeContext)
-
 	// EnterColumn_name is called when entering the column_name production.
 	EnterColumn_name(c *Column_nameContext)
 
@@ -871,15 +862,6 @@ type HplsqlListener interface {
 
 	// ExitCreate_table_columns_item is called when exiting the create_table_columns_item production.
 	ExitCreate_table_columns_item(c *Create_table_columns_itemContext)
-
-	// ExitCreate_table_type_stmt is called when exiting the create_table_type_stmt production.
-	ExitCreate_table_type_stmt(c *Create_table_type_stmtContext)
-
-	// ExitTbl_type is called when exiting the tbl_type production.
-	ExitTbl_type(c *Tbl_typeContext)
-
-	// ExitSql_type is called when exiting the sql_type production.
-	ExitSql_type(c *Sql_typeContext)
 
 	// ExitColumn_name is called when exiting the column_name production.
 	ExitColumn_name(c *Column_nameContext)

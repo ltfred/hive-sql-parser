@@ -28,7 +28,8 @@ func (l *createTableStmtListener) EnterTable_name(ctx *antlr_gen.Table_nameConte
 }
 
 func (l *createTableStmtListener) EnterColumn_name(ctx *antlr_gen.Column_nameContext) {
-	l.tableColumns = append(l.tableColumns, Column{Name: ctx.GetText()})
+	s := strings.TrimRight(strings.TrimLeft(ctx.GetText(), "`"), "`")
+	l.tableColumns = append(l.tableColumns, Column{Name: s})
 }
 
 func (l *createTableStmtListener) EnterDtype(ctx *antlr_gen.DtypeContext) {

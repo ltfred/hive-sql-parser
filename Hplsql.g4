@@ -63,7 +63,6 @@ stmt :
      | create_package_body_stmt
      | create_procedure_stmt
      | create_table_stmt
-     | create_table_type_stmt
      | declare_stmt
      | delete_stmt
      | describe_stmt
@@ -251,18 +250,6 @@ create_table_columns_item :
      | (T_CONSTRAINT qident)? create_table_column_cons
      ;
 
-create_table_type_stmt :
-      T_TYPE ident T_IS T_TABLE T_OF tbl_type (T_NOT T_NULL)? T_INDEX T_BY dtype
-    ;
-
-tbl_type :
-    sql_type | dtype
-    ;
-
-sql_type :
-    qident '%' (T_TYPE | T_ROWTYPE)
-    ;
-
 column_name :
        qident
      ;
@@ -381,7 +368,7 @@ partition_dtype :                  // Data types
      | T_VARCHAR
      | T_VARCHAR2
      | T_XML
-     | qident ('%' (T_TYPE | T_ROWTYPE))?             // User-defined or derived data type
+     | T_BOOLEAN
      ;
 
 partition_dtype_len :             // Data type length or size specification
@@ -494,7 +481,7 @@ dtype :                  // Data types
      | T_VARCHAR
      | T_VARCHAR2
      | T_XML
-     | qident ('%' (T_TYPE | T_ROWTYPE))?             // User-defined or derived data type
+     | T_BOOLEAN
      ;
 
 dtype_len :             // Data type length or size specification
@@ -1696,6 +1683,7 @@ T_BREAK           : B R E A K ;
 T_BULK            : B U L K ;
 T_BY              : B Y ;
 T_BYTE            : B Y T E ; 
+T_BOOLEAN         : B O O L E A N ;
 T_CALL            : C A L L ;
 T_CALLER          : C A L L E R ;
 T_CASCADE         : C A S C A D E ; 
@@ -1965,7 +1953,6 @@ T_TOP             : T O P ;
 T_TRANSACTION     : T R A N S A C T I O N ;
 T_TRUE            : T R U E ;
 T_TRUNCATE        : T R U N C A T E;
-T_TYPE            : T Y P E ; 
 T_UNION           : U N I O N ;
 T_UNIQUE          : U N I Q U E ;
 T_UPDATE          : U P D A T E ; 

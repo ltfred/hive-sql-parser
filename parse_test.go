@@ -53,6 +53,14 @@ func (s *ParseTestSuit) TestParseCreateTableStmt() {
 	s.Equal(1, len(tableStmt.PartitionColumns))
 	s.Equal("c8 partition", tableStmt.PartitionColumns[0].Comment)
 	s.Equal("string", tableStmt.PartitionColumns[0].Type)
+
+	stmt = parser.Parse("create table test1\n\t(\n\t   c1 int COMMENT 'c1c1'," +
+		"\n\t   `type` string not null\n\t) comment '3434'")
+	tableStmt = stmt.(*CreateTableStmt)
+	s.Equal("test1", tableStmt.TableName)
+	s.Equal("3434", tableStmt.TableComment)
+	s.Equal(2, len(tableStmt.TableColumns))
+	s.Equal("type", tableStmt.TableColumns[1].Name)
 }
 
 func (s *ParseTestSuit) TestParseDropTableStmt() {
