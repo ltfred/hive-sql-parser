@@ -7,12 +7,19 @@ import (
 	"strings"
 )
 
+type NullInt struct {
+	Valid bool
+	Value int
+}
+
 type Column struct {
-	Name    string
-	Type    string
-	NotNull bool
-	Length  int
-	Comment string
+	Name      string
+	Type      string
+	NotNull   bool
+	Length    int
+	Precision int
+	Scale     NullInt
+	Comment   string
 }
 
 type createTableStmtListener struct {
@@ -37,10 +44,17 @@ func (l *createTableStmtListener) EnterDtype(ctx *antlr_gen.DtypeContext) {
 }
 
 func (l *createTableStmtListener) EnterDtype_len(ctx *antlr_gen.Dtype_lenContext) {
-	node, ok := ctx.GetChildren()[1].(*antlr.TerminalNodeImpl)
-	if ok {
-		length, _ := strconv.ParseInt(node.String(), 10, 64)
+	ls := strings.TrimLeft(strings.TrimRight(ctx.GetText(), ")"), "(")
+	ll := strings.Split(ls, ",")
+	switch len(ll) {
+	case 1:
+		length, _ := strconv.ParseInt(ll[0], 10, 64)
 		l.tableColumns[len(l.tableColumns)-1].Length = int(length)
+	case 2:
+		precision, _ := strconv.ParseInt(ll[0], 10, 64)
+		l.tableColumns[len(l.tableColumns)-1].Precision = int(precision)
+		scale, _ := strconv.ParseInt(ll[1], 10, 64)
+		l.tableColumns[len(l.tableColumns)-1].Scale = NullInt{Valid: true, Value: int(scale)}
 	}
 }
 

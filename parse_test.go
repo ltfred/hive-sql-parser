@@ -61,6 +61,27 @@ func (s *ParseTestSuit) TestParseCreateTableStmt() {
 	s.Equal("3434", tableStmt.TableComment)
 	s.Equal(2, len(tableStmt.TableColumns))
 	s.Equal("type", tableStmt.TableColumns[1].Name)
+
+	stmt = parser.Parse(`create table test1
+	(
+	   c1 int COMMENT 'c1c1',
+	   c2 string not null,
+	   c3 boolean,
+	   c4 double,
+	   c5 date COMMENT 'date',
+	   c6 timestamp,
+	   c7 varchar(255),
+	   c8 decimal(14, 2),
+	   c9 decimal(10, 0)
+	) comment '3434'`)
+	tableStmt = stmt.(*CreateTableStmt)
+
+	s.Equal("decimal", tableStmt.TableColumns[7].Type)
+	s.Equal(14, tableStmt.TableColumns[7].Precision)
+	s.Equal(2, tableStmt.TableColumns[7].Scale.Value)
+	s.Equal(10, tableStmt.TableColumns[8].Precision)
+	s.Equal(0, tableStmt.TableColumns[8].Scale.Value)
+	s.Equal(true, tableStmt.TableColumns[8].Scale.Valid)
 }
 
 func (s *ParseTestSuit) TestParseDropTableStmt() {
