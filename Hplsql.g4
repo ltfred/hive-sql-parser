@@ -446,6 +446,7 @@ alter_table_add_constraint_item :
 dtype :                  // Data types
        T_CHAR
      | T_CHARACTER
+     | T_CHARACTER_VARYING
      | T_BIGINT
      | T_BINARY_DOUBLE
      | T_BINARY_FLOAT
@@ -477,6 +478,8 @@ dtype :                  // Data types
      | T_STRING
      | T_SYS_REFCURSOR
      | T_TIMESTAMP
+     | T_TIMESTAMP_WITHOUT_TIME_ZONE
+     | T_TIMESTAMP_WITH_TIME_ZONE
      | T_TINYINT
      | T_VARCHAR
      | T_VARCHAR2
@@ -1692,6 +1695,7 @@ T_CASESPECIFIC    : C A S E S P E C I F I C ;
 T_CAST            : C A S T ;
 T_CHAR            : C H A R ;
 T_CHARACTER       : C H A R A C T E R ;
+T_CHARACTER_VARYING       : C H A R A C T E R ' ' V A R Y I N G;
 T_CHARSET         : C H A R S E T ;
 T_CLIENT          : C L I E N T ;
 T_CLOSE           : C L O S E ;
@@ -1744,6 +1748,7 @@ T_DISTINCT        : D I S T I N C T ;
 T_DISTRIBUTE      : D I S T R I B U T E ;
 T_DO              : D O ;
 T_DOUBLE          : D O U B L E ;
+T_DOUBLE_PRECISION          : D O U B L E ' ' P R E C I S I O N ;
 T_DROP            : D R O P ;
 T_DYNAMIC         : D Y N A M I C ; 
 T_ELSE            : E L S E ;
@@ -1946,6 +1951,8 @@ T_TEXTIMAGE_ON    : T E X T I M A G E '_' O N ;
 T_THEN            : T H E N ;
 T_TIME            : T I M E ;
 T_TIMESTAMP       : T I M E S T A M P ;
+T_TIMESTAMP_WITHOUT_TIME_ZONE       : T I M E S T A M P ' ' W I T H O U T ' 'T I M E ' ' Z O N E;
+T_TIMESTAMP_WITH_TIME_ZONE       : T I M E S T A M P ' ' W I T H ' 'T I M E ' ' Z O N E;
 T_TINYINT         : T I N Y I N T ;
 T_TITLE           : T I T L E ;
 T_TO              : T O ; 

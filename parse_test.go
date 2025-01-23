@@ -82,6 +82,38 @@ func (s *ParseTestSuit) TestParseCreateTableStmt() {
 	s.Equal(10, tableStmt.TableColumns[8].Precision)
 	s.Equal(0, tableStmt.TableColumns[8].Scale.Value)
 	s.Equal(true, tableStmt.TableColumns[8].Scale.Valid)
+
+	stmt = parser.Parse(`create table dwd_air_iep_forecast_station_hour_detail (
+    oid SMALLSERIAL NULL,
+code SERIAL NULL,
+name BIGSERIAL NULL,
+aqi SMALLINT NULL, 
+pm25 INTEGER NULL,
+pm10 BIGINT NULL, 
+so2 CHAR(10) NULL,
+no2 VARCHAR(10) NULL,
+co CHARACTER(10) NULL,
+o3 CHARACTER VARYING(10) NULL,
+aqi_main TEXT NULL,
+temperature REAL NULL,
+humidity DOUBLE PRECISION NULL,
+wind_speed BOOLEAN NULL,
+wind_direction TIME NULL,
+pressure TIMETZ NULL,
+create_at TIMESTAMP NULL,
+tim TIMESTAMPTZ NULL,
+cid TIMESTAMP WITHOUT TIME ZONE(6) NULL,
+cid_name TIMESTAMP WITH TIME ZONE(6) NULL,
+type DATE NULL,
+forecast_time GEOGRAPHY NULL,
+aqi_max GEOMETRY NULL, 
+aqi_min1 JSON NULL,
+aqi_min2 NUMERIC NULL,
+aqi_min3 DECIMAL NULL,
+)`)
+
+	tableStmt = stmt.(*CreateTableStmt)
+	s.T().Log(tableStmt)
 }
 
 func (s *ParseTestSuit) TestParseDropTableStmt() {
