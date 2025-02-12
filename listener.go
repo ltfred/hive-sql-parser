@@ -73,7 +73,8 @@ func (l *createTableStmtListener) EnterCreate_table_options_hive_comment(ctx *an
 }
 
 func (l *createTableStmtListener) EnterPartition_column_name(ctx *antlr_gen.Partition_column_nameContext) {
-	l.partitionColumns = append(l.partitionColumns, Column{Name: ctx.GetText()})
+	s := strings.TrimRight(strings.TrimLeft(ctx.GetText(), "`"), "`")
+	l.partitionColumns = append(l.partitionColumns, Column{Name: s})
 }
 
 func (l *createTableStmtListener) EnterPartition_dtype(ctx *antlr_gen.Partition_dtypeContext) {
